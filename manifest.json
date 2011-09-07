@@ -1,0 +1,16 @@
+{
+	"name": "NyanCopter",
+	"version": "1.0.0",
+	"description": "Guide Nyan cat through the tunnel!",
+	"icons": {
+		"128": "assets/images/icon.png"
+	},
+	"app": {
+		"launch": {
+			"local_path": "index.html"
+		}
+	},
+	"permissions": [
+		"unlimitedStorage"
+	]
+}
