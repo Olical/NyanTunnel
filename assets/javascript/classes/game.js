@@ -19,6 +19,9 @@ var Game = new Class({
 			keypress: this.togglePause.bind(this)
 		};
 		this.scoreCount = 0;
+		this.wallStepGap = 500;
+		this.gapPosition = Number.random(0, 500);
+		this.gapHeight = Number.random(100, 400);
 		
 		// Add events
 		document.addEvents(this.events);
@@ -62,6 +65,50 @@ var Game = new Class({
 		
 		// Change the sprite sheet state for the cat (at 3 fps)
 		this.intervals.push(setInterval(this.incrementSpriteState.bind(this), 1000 / 3));
+		
+		// Start the wall step timeout
+		setTimeout(this.manageWalls.bind(this), this.wallStepGap);
+	},
+	manageWalls: function() {
+		// If we are not paused mange and then recurse via timeout
+		if(!this.paused) {
+			// Move the walls to the left
+			this.walls.each(function(wall) {
+				wall.setPosition({
+					x: wall.position.x - wall.size.x,
+					y: wall.position.y
+				});
+			});
+			
+			// Filter out walls that have gone off screen
+			this.walls = this.walls.filter(function(wall) {
+				if(wall.position.x + wall.size.x > 0) {
+					return true;
+				}
+
+				return false;
+			});
+			
+			// Add a new wall at the end in a random place
+			this.gapPosition = (this.gapPosition + Number.random(-30, 30)).limit(0, 500);
+			this.gapHeight = (this.gapHeight + Number.random(-20, 20)).limit(100, 400);
+			
+			this.walls.push(Object.clone(this.sprites.wall));
+			this.walls.getLast().setPosition({
+				x: 600 - this.sprites.wall.size.x,
+				y: this.gapPosition - 500
+			});
+			
+			this.walls.push(Object.clone(this.sprites.wall));
+			this.walls.getLast().setPosition({
+				x: 600 - this.sprites.wall.size.x,
+				y: this.gapPosition + this.gapHeight
+			});
+			
+			this.wallStepGap -= 10;
+			this.wallStepGap = this.wallStepGap.limit(100, 1000);
+			setTimeout(this.manageWalls.bind(this), this.wallStepGap);
+		}
 	},
 	manageRainbows: function() {
 		// Move the rainbows to the left
@@ -130,6 +177,11 @@ var Game = new Class({
 		// Draw the background
 		this.sprites.background.draw(this.display);
 		
+		// Draw the walls
+		this.walls.each(function(wall) {
+			wall.draw(this.display);
+		});
+		
 		// Draw the rainbows
 		this.rainbows.each(function(rainbow) {
 			rainbow.draw(this.display);
@@ -141,11 +193,6 @@ var Game = new Class({
 			y: 0,
 			width: 80,
 			height: 50
-		});
-		
-		// Draw the walls
-		this.walls.each(function(wall) {
-			wall.draw(this.display);
 		});
 		
 		// Increment the score
