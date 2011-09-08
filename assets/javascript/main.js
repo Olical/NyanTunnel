@@ -1,6 +1,7 @@
 var sprites = {},
 	display = null,
-	mainNav = null;
+	mainNav = null,
+	game = null;
 
 /**
  * Main script, runs basically everything on DOM ready
@@ -55,10 +56,23 @@ document.addEvent('domready', function() {
 	mainNav = new Navigation(function(from, to) {
 		if(from) {
 			$('page:' + from).addClass('hidden');
+			
+			// If from is play then clean up
+			if(from === 'play') {
+				game.stop();
+			}
 		}
 
 		if(to) {
 			$('page:' + to).removeClass('hidden');
+			
+			// If we are going to play then start the game
+			if(to === 'play') {
+				game = new Game({
+					sprites: sprites,
+					display: display
+				});
+			}
 		}
 	});
 

@@ -18,12 +18,16 @@
 				<a href='javascript:void(0)' data-page='play' class='large-button center'>Play!</a>
 				
 				<div class='page-content'>
-					<p>When your ready, hit play up above. All you have to do is guide nyan cat through the tunnel. To do this just hold space to go up and let go to go down, just like the classic copter game.</p>
+					<p>When your ready, hit play up above. All you have to do is guide nyan cat through the tunnel. To do this just hold the "u" key to go up and let go to go down, just like the classic copter game.</p>
 				</div>
 			</div>
 			
 			<div id='page:play' class='page hidden'>
 				<canvas width='600' height='600' id='display'></canvas>
+			</div>
+			
+			<div id='page:game-over' class='page hidden push-down'>
+				<h1 class='center'>Game over!</h1>
 			</div>
 		</div>
 		
@@ -35,6 +39,7 @@
 		<script type='text/javascript' src='assets/javascript/classes/point.js'></script>
 		<script type='text/javascript' src='assets/javascript/classes/rectangle.js'></script>
 		<script type='text/javascript' src='assets/javascript/classes/sprite.js'></script>
+		<script type='text/javascript' src='assets/javascript/classes/game.js'></script>
 		
 		<!-- Main script -->
 		<script type='text/javascript' src='assets/javascript/main.js'></script>
