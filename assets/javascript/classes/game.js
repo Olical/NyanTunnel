@@ -9,7 +9,7 @@ var Game = new Class({
 		this.sprites = options.sprites;
 		this.display = options.display;
 		this.raiseCat = false;
-		this.spriteState = 0;
+		this.spriteState = 2;
 		
 		// Add events
 		document.addEvents({
@@ -42,10 +42,10 @@ var Game = new Class({
 		};
 	},
 	incrementSpriteState: function() {
-		this.spriteState += 1;
+		this.spriteState -= 1;
 		
-		if(this.spriteState === 3) {
-			this.spriteState = 0;
+		if(this.spriteState === -1) {
+			this.spriteState = 2;
 		}
 	},
 	moveCat: function() {
