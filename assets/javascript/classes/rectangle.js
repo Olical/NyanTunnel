@@ -44,7 +44,7 @@ var Rectangle = new Class({
 	testCollision: function(test) {
 		// Check if any of the points are within the test rectangles bounds
 		// If so, return true
-		return this.points.every(function(point) {
+		return this.points.some(function(point) {
 			if(
 				point.x > test.position.x &&
 				point.x < test.position.x + test.size.x &&
