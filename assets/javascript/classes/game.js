@@ -9,6 +9,7 @@ var Game = new Class({
 		this.sprites = options.sprites;
 		this.display = options.display;
 		this.raiseCat = false;
+		this.spriteState = 0;
 		
 		// Add events
 		document.addEvents({
@@ -25,11 +26,21 @@ var Game = new Class({
 		// Calculate cat movement (at 30 fps)
 		this.intervals.push(setInterval(this.moveCat.bind(this), 1000 / 30));
 		
+		// Change the sprite sheet state for the cat (at 3 fps)
+		this.intervals.push(setInterval(this.incrementSpriteState.bind(this), 1000 / 3));
+		
 		// Set the cats starting position
 		this.sprites.cat.setPosition({
 			x: 120,
 			y: 100
 		});
+	},
+	incrementSpriteState: function() {
+		this.spriteState += 1;
+		
+		if(this.spriteState === 3) {
+			this.spriteState = 0;
+		}
 	},
 	moveCat: function() {
 		var original = this.sprites.cat.position.y
@@ -57,7 +68,7 @@ var Game = new Class({
 		
 		// Draw the cat
 		this.sprites.cat.draw(this.display, {
-			x: 0,
+			x: this.spriteState * 80,
 			y: 0,
 			width: 80,
 			height: 50
