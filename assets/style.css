@@ -29,3 +29,8 @@ body {
 	font-family: 'Droid Sans', sans-serif;
 	color: #222222;
 }
+
+/* Useful classes */
+.hidden {
+	display: none;
+}
