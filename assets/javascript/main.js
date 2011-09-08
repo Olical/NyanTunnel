@@ -10,8 +10,12 @@ var sprites = {},
 document.addEvent('domready', function() {
 	// Load the sprites
 	sprites.cat = new Sprite({
-		size: {
+		resize: {
 			x: 240,
+			y: 50
+		},
+		size: {
+			x: 96,
 			y: 50
 		},
 		position: {

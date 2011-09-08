@@ -9,6 +9,8 @@ var Sprite = new Class({
 		// Pass the options up to the Rectangle class
 		this.parent(options);
 		
+		this.resize = options.resize || options.size;
+		
 		this.loaded = false;
 		
 		this.velocity = {
@@ -29,9 +31,9 @@ var Sprite = new Class({
 		temp.onload = function() {
 			// When done loading, store the image and run the callback
 			this.image = new Element('canvas');
-			this.image.width = this.size.x;
-			this.image.height = this.size.y;
-			this.image.getContext('2d').drawImage(temp, this.position.x, this.position.y, this.size.x, this.size.y);
+			this.image.width = this.resize.x;
+			this.image.height = this.resize.y;
+			this.image.getContext('2d').drawImage(temp, this.position.x, this.position.y, this.resize.x, this.resize.y);
 			this.loaded = true;
 			
 			if(callback) {
