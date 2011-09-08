@@ -22,12 +22,12 @@ var Game = new Class({
 		// Display everything (at 24 fps)
 		this.intervals.push(setInterval(this.displayAll.bind(this), 1000 / 24));
 		
-		// Calculate cat movement (at 16 fps)
-		this.intervals.push(setInterval(this.moveCat.bind(this), 1000 / 16));
+		// Calculate cat movement (at 30 fps)
+		this.intervals.push(setInterval(this.moveCat.bind(this), 1000 / 30));
 		
 		// Set the cats starting position
 		this.sprites.cat.setPosition({
-			x: 50,
+			x: 120,
 			y: 100
 		});
 	},
@@ -36,18 +36,25 @@ var Game = new Class({
 		
 		if(this.raiseCat) {
 			// Raise
-			this.sprites.cat.setPosition({
-				x: 50,
-				y: original - 5
+			this.sprites.cat.addVelocity({
+				x: 0,
+				y: -0.5
 			});
 		}
 		else {
 			// Drop
-			this.sprites.cat.setPosition({
-				x: 50,
-				y: original + 5
+			this.sprites.cat.addVelocity({
+				x: 0,
+				y: 0.5
 			});
 		}
+		
+		this.sprites.cat.applyFriction({
+			x: 0,
+			y: 0.1
+		});
+		
+		this.sprites.cat.applyVelocity();
 	},
 	displayAll: function() {
 		// Draw the background

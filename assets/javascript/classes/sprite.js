@@ -11,6 +11,11 @@ var Sprite = new Class({
 		
 		this.loaded = false;
 		
+		this.velocity = {
+			x: 0,
+			y: 0
+		};
+		
 		// If there is a path, load an image
 		if(path) {
 			this.loadImage(path, callback);
@@ -40,5 +45,19 @@ var Sprite = new Class({
 	draw: function(target) {
 		// Draw the image onto the target
 		target.drawImage(this.image, this.position.x, this.position.y);
+	},
+	addVelocity: function(velocity) {
+		this.velocity.x += velocity.x;
+		this.velocity.y += velocity.y;
+	},
+	applyFriction: function(friction) {
+		this.velocity.x -= friction.x;
+		this.velocity.y -= friction.y;
+	},
+	applyVelocity: function() {
+		this.setPosition({
+			x: this.position.x + this.velocity.x,
+			y: this.position.y + this.velocity.y
+		});
 	}
 });
