@@ -61,6 +61,16 @@ var Game = new Class({
 		}
 		
 		this.sprites.cat.applyVelocity();
+		
+		// If we go out of the world, end the game
+		if(
+			this.sprites.cat.position.x < 0 ||
+			this.sprites.cat.position.x > 520 ||
+			this.sprites.cat.position.y < 0 ||
+			this.sprites.cat.position.y > 520
+		) {
+			mainNav.checkTag('game-over');
+		}
 	},
 	displayAll: function() {
 		// Draw the background
