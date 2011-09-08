@@ -14,7 +14,7 @@ div.wrapper {
 	height: 600px;
 	background-color: #FFFFFF;
 	margin: 100px auto;
-	webkit-box-shadow: 0px 0px 10px 0px rgba(30, 30, 30, 0.5);
+	-webkit-box-shadow: 0px 0px 10px 0px rgba(30, 30, 30, 0.5);
 	-moz-box-shadow: 0px 0px 10px 0px rgba(30, 30, 30, 0.5);
 	box-shadow: 0px 0px 10px 0px rgba(30, 30, 30, 0.5);
 }
@@ -22,6 +22,10 @@ div.wrapper {
 div.page {
 	width: 100%;
 	height: 100%;
+}
+
+div.page-content {
+	padding: 5px;
 }
 
 /* Text */
@@ -33,4 +37,34 @@ body {
 /* Useful classes */
 .hidden {
 	display: none;
+}
+
+.center {
+	margin: 0 auto;
+}
+
+.push-down {
+	padding-top: 50px;
+}
+
+/* Buttons */
+a.large-button {
+	padding: 10px 20px;
+	color: #FFFFFF;
+	display: block;
+	text-align: center;
+	width: 20%;
+	text-decoration: none;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #15BF48;
+	border: 2px solid #11993A;
+	-webkit-transition: all 300ms ease;
+	-moz-transition: all 300ms ease;
+	transition: all 300ms ease;
+}
+
+a.large-button:hover {
+	background-color: #12A63F;
 }
