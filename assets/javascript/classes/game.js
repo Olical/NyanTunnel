@@ -11,6 +11,7 @@ var Game = new Class({
 		this.raiseCat = false;
 		this.spriteState = 2;
 		this.rainbows = [];
+		this.walls = [];
 		this.paused = false;
 		this.events = {
 			keydown: this.enableRaiseCat.bind(this),
@@ -140,6 +141,11 @@ var Game = new Class({
 			y: 0,
 			width: 80,
 			height: 50
+		});
+		
+		// Draw the walls
+		this.walls.each(function(wall) {
+			wall.draw(this.display);
 		});
 		
 		// Increment the score
