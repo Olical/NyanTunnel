@@ -11,6 +11,7 @@ var Game = new Class({
 		this.raiseCat = false;
 		this.spriteState = 2;
 		this.rainbows = [];
+		this.paused = false;
 		
 		// Add events
 		document.addEvents({
@@ -33,6 +34,14 @@ var Game = new Class({
 			x: 0,
 			y: 0
 		};
+	},
+	pause: function() {
+		// Stop all intervals
+		this.intervals.each(function(interval) {
+			clearInterval(interval);
+		});
+		
+		this.intervals = [];
 	},
 	start: function() {
 		// Display everything (at 24 fps)
@@ -134,9 +143,6 @@ var Game = new Class({
 			keyup: this.disableRaiseCat
 		});
 		
-		// Stop all intervals
-		this.intervals.each(function(interval) {
-			clearInterval(interval);
-		});
+		this.pause();
 	}
 });
