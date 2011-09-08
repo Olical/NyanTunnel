@@ -70,6 +70,15 @@ var Game = new Class({
 			});
 		});
 		
+		// Filter out rainbows that have gone off screen
+		this.rainbows = this.rainbows.filter(function(rainbow) {
+			if(rainbow.position.x + rainbow.size.x > 0) {
+				return true;
+			}
+			
+			return false;
+		});
+		
 		// Add a new rainbow in the cats butt
 		this.rainbows.push(Object.clone(this.sprites.rainbow));
 		this.rainbows.getLast().setPosition({
