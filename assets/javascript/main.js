@@ -12,4 +12,10 @@ document.addEvent('domready', function() {
 			$('page:' + to).removeClass('hidden');
 		}
 	});
+	
+	mainNav.checkTag('menu');
+	
+	$$('a[data-page]').addEvent('click', function() {
+		mainNav.checkTag(this.get('data-page'));
+	});
 });
