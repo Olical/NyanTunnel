@@ -42,9 +42,14 @@ var Sprite = new Class({
 		// Set the src of the image to begin loading
 		temp.src = path;
 	},
-	draw: function(target) {
+	draw: function(target, offset) {
 		// Draw the image onto the target
-		target.drawImage(this.image, (this.position.x + 0.5) << 0, (this.position.y + 0.5) << 0);
+		if(offset) {
+			target.drawImage(this.image, (this.position.x + 0.5) << 0, (this.position.y + 0.5) << 0, this.size.x, this.size.y, offset.x, offset.y, offset.width, offset.height);
+		}
+		else {
+			target.drawImage(this.image, (this.position.x + 0.5) << 0, (this.position.y + 0.5) << 0);
+		}
 	},
 	addVelocity: function(velocity) {
 		this.velocity.x += velocity.x;
