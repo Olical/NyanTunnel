@@ -34,6 +34,12 @@ var Game = new Class({
 			x: 120,
 			y: 100
 		});
+		
+		// Reset the cats velocity
+		this.sprites.cat.velocity = {
+			x: 0,
+			y: 0
+		};
 	},
 	incrementSpriteState: function() {
 		this.spriteState += 1;
