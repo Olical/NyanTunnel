@@ -17,7 +17,7 @@ var Game = new Class({
 			keyup: this.disableRaiseCat.bind(this),
 			keypress: this.togglePause.bind(this)
 		};
-		this.scoreCount = new Date().getTime();
+		this.scoreCount = 0;
 		
 		// Add events
 		document.addEvents(this.events);
@@ -141,6 +141,9 @@ var Game = new Class({
 			width: 80,
 			height: 50
 		});
+		
+		// Increment the score
+		this.scoreCount += 1;
 	},
 	enableRaiseCat: function(e) {
 		if(e.code === 85) {
@@ -174,6 +177,6 @@ var Game = new Class({
 		this.pause();
 		
 		// Save the score
-		scoreDisplay.set('text', new Date().getTime() - this.scoreCount);
+		scoreDisplay.set('text', this.scoreCount);
 	}
 });
