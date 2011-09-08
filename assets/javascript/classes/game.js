@@ -22,6 +22,8 @@ var Game = new Class({
 		this.wallStepGap = 500;
 		this.gapPosition = Number.random(0, 500);
 		this.gapHeight = Number.random(100, 400);
+		this.wallsTimeout = null;
+		this.alive = true;
 		
 		// Add events
 		document.addEvents(this.events);
@@ -51,7 +53,12 @@ var Game = new Class({
 			clearInterval(interval);
 		});
 		
+		if(this.wallsTimeout) {
+			clearTimeout(this.wallsTimeout);
+		}
+		
 		this.intervals = [];
+		this.wallsTimeout = null;
 	},
 	start: function() {
 		// Display everything (at 24 fps)
@@ -67,11 +74,11 @@ var Game = new Class({
 		this.intervals.push(setInterval(this.incrementSpriteState.bind(this), 1000 / 3));
 		
 		// Start the wall step timeout
-		setTimeout(this.manageWalls.bind(this), this.wallStepGap);
+		this.wallsTimeout = setTimeout(this.manageWalls.bind(this), this.wallStepGap);
 	},
 	manageWalls: function() {
 		// If we are not paused mange and then recurse via timeout
-		if(!this.paused) {
+		if(!this.paused && this.alive) {
 			// Move the walls to the left
 			this.walls.each(function(wall) {
 				wall.setPosition({
@@ -117,7 +124,7 @@ var Game = new Class({
 			
 			this.wallStepGap -= 10;
 			this.wallStepGap = this.wallStepGap.limit(100, 1000);
-			setTimeout(this.manageWalls.bind(this), this.wallStepGap);
+			this.wallsTimeout = setTimeout(this.manageWalls.bind(this), this.wallStepGap);
 		}
 	},
 	manageRainbows: function() {
@@ -241,5 +248,7 @@ var Game = new Class({
 		
 		// Save the score
 		scoreDisplay.set('text', this.scoreCount);
+		
+		this.alive = false;
 	}
 });
