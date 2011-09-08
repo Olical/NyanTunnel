@@ -50,10 +50,6 @@ var Sprite = new Class({
 		this.velocity.x += velocity.x;
 		this.velocity.y += velocity.y;
 	},
-	applyFriction: function(friction) {
-		this.velocity.x -= friction.x;
-		this.velocity.y -= friction.y;
-	},
 	applyVelocity: function() {
 		this.setPosition({
 			x: this.position.x + this.velocity.x,
