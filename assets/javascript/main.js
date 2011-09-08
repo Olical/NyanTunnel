@@ -1,5 +1,6 @@
 var sprites = {},
-	display = null;
+	display = null,
+	mainNav = null;
 
 /**
  * Main script, runs basically everything on DOM ready
@@ -15,7 +16,7 @@ document.addEvent('domready', function() {
 			x: 0,
 			y: 0
 		}
-	}, 'assets/images/nyan-cat.png', setUpNav);
+	}, 'assets/images/nyan-cat.png', checkLoadState);
 	
 	sprites.wall = new Sprite({
 		size: {
@@ -26,7 +27,7 @@ document.addEvent('domready', function() {
 			x: 0,
 			y: 0
 		}
-	}, 'assets/images/wall.png', setUpNav);
+	}, 'assets/images/wall.png', checkLoadState);
 	
 	sprites.rainbow = new Sprite({
 		size: {
@@ -37,19 +38,21 @@ document.addEvent('domready', function() {
 			x: 0,
 			y: 0
 		}
-	}, 'assets/images/rainbow.png', setUpNav);
+	}, 'assets/images/rainbow.png', checkLoadState);
 	
-	display = $('display').getContext('2d');
-});
-
-function setUpNav() {
-	// Make sure all are loaded
-	if(!sprites.cat.loaded || !sprites.wall.loaded || !sprites.rainbow.loaded) {
-		return false
-	}
+	sprites.background = new Sprite({
+		size: {
+			x: 600,
+			y: 600
+		},
+		position: {
+			x: 0,
+			y: 0
+		}
+	}, 'assets/images/background.png', checkLoadState);
 	
-	// Loaded, set up page management
-	var mainNav = new Navigation(function(from, to) {
+	// Set up page management
+	mainNav = new Navigation(function(from, to) {
 		if(from) {
 			$('page:' + from).addClass('hidden');
 		}
@@ -59,9 +62,21 @@ function setUpNav() {
 		}
 	});
 
-	mainNav.checkTag('menu');
+	mainNav.checkTag('loading');
 
 	$$('a[data-page]').addEvent('click', function() {
 		mainNav.checkTag(this.get('data-page'));
 	});
+	
+	display = $('display').getContext('2d');
+});
+
+function checkLoadState() {
+	// Make sure all are loaded
+	if(!sprites.cat.loaded || !sprites.wall.loaded || !sprites.rainbow.loaded || !sprites.background.loaded) {
+		return false
+	}
+	
+	// All are loaded, show the menu
+	mainNav.checkTag('menu');
 }
