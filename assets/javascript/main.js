@@ -32,8 +32,8 @@ document.addEvent('domready', function() {
 	
 	sprites.rainbow = new Sprite({
 		size: {
-			x: 3,
-			y: 12
+			x: 5,
+			y: 40
 		},
 		position: {
 			x: 0,

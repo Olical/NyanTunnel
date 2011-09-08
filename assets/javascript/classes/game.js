@@ -10,6 +10,7 @@ var Game = new Class({
 		this.display = options.display;
 		this.raiseCat = false;
 		this.spriteState = 2;
+		this.rainbows = [];
 		
 		// Add events
 		document.addEvents({
@@ -19,15 +20,7 @@ var Game = new Class({
 		
 		// Initialise intervals
 		this.intervals = [];
-		
-		// Display everything (at 24 fps)
-		this.intervals.push(setInterval(this.displayAll.bind(this), 1000 / 24));
-		
-		// Calculate cat movement (at 30 fps)
-		this.intervals.push(setInterval(this.moveCat.bind(this), 1000 / 30));
-		
-		// Change the sprite sheet state for the cat (at 3 fps)
-		this.intervals.push(setInterval(this.incrementSpriteState.bind(this), 1000 / 3));
+		this.start();
 		
 		// Set the cats starting position
 		this.sprites.cat.setPosition({
@@ -40,6 +33,35 @@ var Game = new Class({
 			x: 0,
 			y: 0
 		};
+	},
+	start: function() {
+		// Display everything (at 24 fps)
+		this.intervals.push(setInterval(this.displayAll.bind(this), 1000 / 24));
+		
+		// Calculate cat movement (at 30 fps)
+		this.intervals.push(setInterval(this.moveCat.bind(this), 1000 / 30));
+		
+		// Manage rainbow movement, addition and removal (at 20 fps)
+		this.intervals.push(setInterval(this.manageRainbows.bind(this), 1000 / 20));
+		
+		// Change the sprite sheet state for the cat (at 3 fps)
+		this.intervals.push(setInterval(this.incrementSpriteState.bind(this), 1000 / 3));
+	},
+	manageRainbows: function() {
+		// Move the rainbows to the left
+		this.rainbows.each(function(rainbow) {
+			rainbow.setPosition({
+				x: rainbow.position.x - rainbow.size.x,
+				y: rainbow.position.y
+			});
+		});
+		
+		// Add a new rainbow in the cats butt
+		this.rainbows.push(Object.clone(this.sprites.rainbow));
+		this.rainbows.getLast().setPosition({
+			x: this.sprites.cat.position.x + 15,
+			y: this.sprites.cat.position.y + 5
+		});
 	},
 	incrementSpriteState: function() {
 		this.spriteState -= 1;
@@ -81,6 +103,11 @@ var Game = new Class({
 	displayAll: function() {
 		// Draw the background
 		this.sprites.background.draw(this.display);
+		
+		// Draw the rainbows
+		this.rainbows.each(function(rainbow) {
+			rainbow.draw(this.display);
+		});
 		
 		// Draw the cat
 		this.sprites.cat.draw(this.display, {
