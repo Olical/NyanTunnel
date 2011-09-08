@@ -48,6 +48,10 @@ body {
 	padding-top: 50px;
 }
 
+.push-down-small {
+	padding-top: 20px;
+}
+
 /* Buttons */
 a.large-button {
 	padding: 10px 20px;
