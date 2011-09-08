@@ -16,7 +16,8 @@ var Game = new Class({
 		// Add events
 		document.addEvents({
 			keydown: this.enableRaiseCat.bind(this),
-			keyup: this.disableRaiseCat.bind(this)
+			keyup: this.disableRaiseCat.bind(this),
+			keypress: this.togglePause.bind(this)
 		});
 		
 		// Initialise intervals
@@ -139,11 +140,26 @@ var Game = new Class({
 			this.raiseCat = false;
 		}
 	},
+	togglePause: function(e) {
+		if(e.code === 112) {
+			if(!this.paused) {
+				// Pause the game
+				this.pause();
+				this.paused = true;
+			}
+			else {
+				// Unpause the game
+				this.start();
+				this.paused = false;
+			}
+		}
+	},
 	stop: function() {
 		// Remove events
 		document.removeEvents({
 			keydown: this.enableRaiseCat,
-			keyup: this.disableRaiseCat
+			keyup: this.disableRaiseCat,
+			keypress: this.togglePause
 		});
 		
 		this.pause();
