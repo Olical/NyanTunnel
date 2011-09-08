@@ -44,7 +44,7 @@ var Sprite = new Class({
 	},
 	draw: function(target) {
 		// Draw the image onto the target
-		target.drawImage(this.image, this.position.x, this.position.y);
+		target.drawImage(this.image, (this.position.x + 0.5) << 0, (this.position.y + 0.5) << 0);
 	},
 	addVelocity: function(velocity) {
 		this.velocity.x += velocity.x;
