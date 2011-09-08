@@ -34,6 +34,9 @@ var Game = new Class({
 			x: 0,
 			y: 0
 		};
+		
+		// Call displayAll once to stop any initial flicker
+		this.displayAll();
 	},
 	pause: function() {
 		// Stop all intervals
@@ -50,8 +53,8 @@ var Game = new Class({
 		// Calculate cat movement (at 30 fps)
 		this.intervals.push(setInterval(this.moveCat.bind(this), 1000 / 30));
 		
-		// Manage rainbow movement, addition and removal (at 20 fps)
-		this.intervals.push(setInterval(this.manageRainbows.bind(this), 1000 / 20));
+		// Manage rainbow movement, addition and removal (at 10 fps)
+		this.intervals.push(setInterval(this.manageRainbows.bind(this), 1000 / 10));
 		
 		// Change the sprite sheet state for the cat (at 3 fps)
 		this.intervals.push(setInterval(this.incrementSpriteState.bind(this), 1000 / 3));
@@ -68,7 +71,7 @@ var Game = new Class({
 		// Add a new rainbow in the cats butt
 		this.rainbows.push(Object.clone(this.sprites.rainbow));
 		this.rainbows.getLast().setPosition({
-			x: this.sprites.cat.position.x + 15,
+			x: this.sprites.cat.position.x,
 			y: this.sprites.cat.position.y + 5
 		});
 	},
