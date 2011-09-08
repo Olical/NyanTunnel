@@ -49,11 +49,6 @@ var Game = new Class({
 			});
 		}
 		
-		this.sprites.cat.applyFriction({
-			x: 0,
-			y: 0.1
-		});
-		
 		this.sprites.cat.applyVelocity();
 	},
 	displayAll: function() {
