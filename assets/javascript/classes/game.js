@@ -102,6 +102,7 @@ var Game = new Class({
 			});
 		}
 		
+		this.sprites.cat.velocity.y = this.sprites.cat.velocity.y.limit(-10, 10);
 		this.sprites.cat.applyVelocity();
 		
 		// If we go out of the world, end the game
