@@ -10,7 +10,7 @@ document.addEvent('domready', function() {
 	// Load the sprites
 	sprites.cat = new Sprite({
 		size: {
-			x: 80,
+			x: 240,
 			y: 50
 		},
 		position: {

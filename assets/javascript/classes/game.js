@@ -56,7 +56,12 @@ var Game = new Class({
 		this.sprites.background.draw(this.display);
 		
 		// Draw the cat
-		this.sprites.cat.draw(this.display);
+		this.sprites.cat.draw(this.display, {
+			x: 0,
+			y: 0,
+			width: 80,
+			height: 50
+		});
 	},
 	enableRaiseCat: function(e) {
 		if(e.code === 85) {
