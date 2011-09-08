@@ -17,6 +17,7 @@ var Game = new Class({
 			keyup: this.disableRaiseCat.bind(this),
 			keypress: this.togglePause.bind(this)
 		};
+		this.scoreCount = new Date().getTime();
 		
 		// Add events
 		document.addEvents(this.events);
@@ -171,5 +172,8 @@ var Game = new Class({
 		
 		// Remove intervals by pausing
 		this.pause();
+		
+		// Save the score
+		scoreDisplay.set('text', new Date().getTime() - this.scoreCount);
 	}
 });

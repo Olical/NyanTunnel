@@ -1,7 +1,8 @@
 var sprites = {},
 	display = null,
 	mainNav = null,
-	game = null;
+	game = null,
+	scoreDisplay = null;
 
 /**
  * Main script, runs basically everything on DOM ready
@@ -83,6 +84,7 @@ document.addEvent('domready', function() {
 	});
 	
 	display = $('display').getContext('2d');
+	scoreDisplay = $('score-display');
 });
 
 function checkLoadState() {
