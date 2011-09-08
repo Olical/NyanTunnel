@@ -12,13 +12,14 @@ var Game = new Class({
 		this.spriteState = 2;
 		this.rainbows = [];
 		this.paused = false;
-		
-		// Add events
-		document.addEvents({
+		this.events = {
 			keydown: this.enableRaiseCat.bind(this),
 			keyup: this.disableRaiseCat.bind(this),
 			keypress: this.togglePause.bind(this)
-		});
+		};
+		
+		// Add events
+		document.addEvents(this.events);
 		
 		// Initialise intervals
 		this.intervals = [];
@@ -156,12 +157,9 @@ var Game = new Class({
 	},
 	stop: function() {
 		// Remove events
-		document.removeEvents({
-			keydown: this.enableRaiseCat,
-			keyup: this.disableRaiseCat,
-			keypress: this.togglePause
-		});
+		document.removeEvents(this.events);
 		
+		// Remove intervals by pausing
 		this.pause();
 	}
 });
