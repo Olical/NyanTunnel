@@ -78,7 +78,17 @@ var Game = new Class({
 					x: wall.position.x - wall.size.x,
 					y: wall.position.y
 				});
-			});
+				
+				// Check for a collision
+				if(this.sprites.cat.testCollision(wall, {
+					width: 96,
+					height: 50
+				})) {
+					// The cat hit a wall D:
+					// Oh well, game over
+					mainNav.checkTag('game-over');
+				}
+			}.bind(this));
 			
 			// Filter out walls that have gone off screen
 			this.walls = this.walls.filter(function(wall) {
