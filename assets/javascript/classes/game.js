@@ -48,6 +48,9 @@ var Game = new Class({
 		this.displayAll();
 	},
 	pause: function() {
+		// Pause the music
+		backgroundMusic.pause();
+		
 		// Stop all intervals
 		this.intervals.each(function(interval) {
 			clearInterval(interval);
@@ -75,6 +78,9 @@ var Game = new Class({
 		
 		// Start the wall step timeout
 		this.wallsTimeout = setTimeout(this.manageWalls.bind(this), this.wallStepGap);
+		
+		// Start the music!
+		backgroundMusic.play();
 	},
 	manageWalls: function() {
 		// If we are not paused mange and then recurse via timeout
@@ -240,6 +246,9 @@ var Game = new Class({
 		}
 	},
 	stop: function() {
+		// Stop the music :(
+		backgroundMusic.stop();
+		
 		// Remove events
 		document.removeEvents(this.events);
 		

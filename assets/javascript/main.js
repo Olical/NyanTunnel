@@ -60,6 +60,8 @@ document.addEvent('domready', function() {
 	
 	// Load the music
 	backgroundMusic = new Sound('assets/audio/nyan-cat.ogg', checkLoadState);
+	backgroundMusic.element.loop = true;
+	backgroundMusic.setVolume(0.3);
 	
 	// Set up page management
 	mainNav = new Navigation(function(from, to) {
