@@ -2,7 +2,8 @@ var sprites = {},
 	display = null,
 	mainNav = null,
 	game = null,
-	scoreDisplay = null;
+	scoreDisplay = null,
+	backgroundMusic = null;
 
 /**
  * Main script, runs basically everything on DOM ready
@@ -15,7 +16,7 @@ document.addEvent('domready', function() {
 			y: 50
 		},
 		size: {
-			x: 96,
+			x: 80,
 			y: 50
 		},
 		position: {
@@ -57,6 +58,11 @@ document.addEvent('domready', function() {
 		}
 	}, 'assets/images/background.png', checkLoadState);
 	
+	// Load the music
+	backgroundMusic = new Sound('assets/audio/nyan-cat.ogg', checkLoadState);
+	backgroundMusic.element.loop = true;
+	backgroundMusic.setVolume(0.1);
+	
 	// Set up page management
 	mainNav = new Navigation(function(from, to) {
 		if(from) {
@@ -93,7 +99,7 @@ document.addEvent('domready', function() {
 
 function checkLoadState() {
 	// Make sure all are loaded
-	if(!sprites.cat.loaded || !sprites.wall.loaded || !sprites.rainbow.loaded || !sprites.background.loaded) {
+	if(!sprites.cat.loaded || !sprites.wall.loaded || !sprites.rainbow.loaded || !sprites.background.loaded || !backgroundMusic.loaded) {
 		return false
 	}
 	

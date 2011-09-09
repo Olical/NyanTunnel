@@ -21,7 +21,7 @@ var Game = new Class({
 		this.scoreCount = 0;
 		this.wallStepGap = 500;
 		this.gapPosition = Number.random(0, 500);
-		this.gapHeight = Number.random(100, 400);
+		this.gapHeight = Number.random(180, 400);
 		this.wallsTimeout = null;
 		this.alive = true;
 		
@@ -48,6 +48,9 @@ var Game = new Class({
 		this.displayAll();
 	},
 	pause: function() {
+		// Pause the music
+		backgroundMusic.pause();
+		
 		// Stop all intervals
 		this.intervals.each(function(interval) {
 			clearInterval(interval);
@@ -75,6 +78,9 @@ var Game = new Class({
 		
 		// Start the wall step timeout
 		this.wallsTimeout = setTimeout(this.manageWalls.bind(this), this.wallStepGap);
+		
+		// Start the music!
+		backgroundMusic.play();
 	},
 	manageWalls: function() {
 		// If we are not paused mange and then recurse via timeout
@@ -108,7 +114,7 @@ var Game = new Class({
 			
 			// Add a new wall at the end in a random place
 			this.gapPosition = (this.gapPosition + Number.random(-30, 30)).limit(0, 500);
-			this.gapHeight = (this.gapHeight + Number.random(-20, 20)).limit(100, 400);
+			this.gapHeight = (this.gapHeight + Number.random(-20, 20)).limit(180, 400);
 			
 			this.walls.push(Object.clone(this.sprites.wall));
 			this.walls.getLast().setPosition({
@@ -183,9 +189,9 @@ var Game = new Class({
 		// If we go out of the world, end the game
 		if(
 			this.sprites.cat.position.x < 0 ||
-			this.sprites.cat.position.x > 520 ||
+			this.sprites.cat.position.x > 550 ||
 			this.sprites.cat.position.y < 0 ||
-			this.sprites.cat.position.y > 520
+			this.sprites.cat.position.y > 550
 		) {
 			mainNav.checkTag('game-over');
 		}
@@ -240,6 +246,9 @@ var Game = new Class({
 		}
 	},
 	stop: function() {
+		// Stop the music :(
+		backgroundMusic.stop();
+		
 		// Remove events
 		document.removeEvents(this.events);
 		
