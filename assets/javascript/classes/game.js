@@ -21,7 +21,7 @@ var Game = new Class({
 		this.scoreCount = 0;
 		this.wallStepGap = 500;
 		this.gapPosition = Number.random(0, 500);
-		this.gapHeight = Number.random(100, 400);
+		this.gapHeight = Number.random(180, 400);
 		this.wallsTimeout = null;
 		this.alive = true;
 		
@@ -108,7 +108,7 @@ var Game = new Class({
 			
 			// Add a new wall at the end in a random place
 			this.gapPosition = (this.gapPosition + Number.random(-30, 30)).limit(0, 500);
-			this.gapHeight = (this.gapHeight + Number.random(-20, 20)).limit(100, 400);
+			this.gapHeight = (this.gapHeight + Number.random(-20, 20)).limit(180, 400);
 			
 			this.walls.push(Object.clone(this.sprites.wall));
 			this.walls.getLast().setPosition({
