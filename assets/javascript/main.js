@@ -15,7 +15,7 @@ document.addEvent('domready', function() {
 			y: 50
 		},
 		size: {
-			x: 96,
+			x: 80,
 			y: 50
 		},
 		position: {
