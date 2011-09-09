@@ -183,9 +183,9 @@ var Game = new Class({
 		// If we go out of the world, end the game
 		if(
 			this.sprites.cat.position.x < 0 ||
-			this.sprites.cat.position.x > 520 ||
+			this.sprites.cat.position.x > 550 ||
 			this.sprites.cat.position.y < 0 ||
-			this.sprites.cat.position.y > 520
+			this.sprites.cat.position.y > 550
 		) {
 			mainNav.checkTag('game-over');
 		}
