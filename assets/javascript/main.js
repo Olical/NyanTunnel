@@ -59,7 +59,7 @@ document.addEvent('domready', function() {
 	}, 'assets/images/background.png', checkLoadState);
 	
 	// Load the music
-	backgroundMusic = new Audio('assets/audio/nyan-cat.ogg', checkLoadState);
+	backgroundMusic = new Sound('assets/audio/nyan-cat.ogg', checkLoadState);
 	
 	// Set up page management
 	mainNav = new Navigation(function(from, to) {

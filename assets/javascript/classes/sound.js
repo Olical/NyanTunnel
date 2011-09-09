@@ -1,8 +1,8 @@
 /**
- * Audio class
+ * Sound class
  * Used for the loading and controlling of sound files
  */
-var Audio = new Class({
+var Sound = new Class({
 	initialize: function(file, callback) {
 		this.element = new Element('audio');
 		this.loaded = false;
