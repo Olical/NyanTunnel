@@ -4,7 +4,7 @@
  */
 var Sound = new Class({
 	initialize: function(file, callback) {
-		this.element = new Element('audio');
+		this.element = new Audio();
 		this.loaded = false;
 		this.callback = null;
 		this.element.addEvent('load', this.loadedCallback.bind(this));
