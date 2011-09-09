@@ -52,6 +52,16 @@ body {
 	padding-top: 20px;
 }
 
+a.github-ribbon {
+	height: 149px;
+	width: 149px;
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: transparent url('images/github-ribbon.png') no-repeat left top;
+}
+
 /* Buttons */
 a.large-button {
 	padding: 10px 20px;
