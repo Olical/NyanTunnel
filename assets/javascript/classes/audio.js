@@ -6,6 +6,8 @@ var Audio = new Class({
 	initialize: function(file, callback) {
 		this.element = new Element('audio');
 		this.loaded = false;
+		this.callback = null;
+		this.element.addEvent('load', this.loadedCallback.bind(this));
 		
 		if(file) {
 			this.load(file, callback);
@@ -30,15 +32,16 @@ var Audio = new Class({
 		this.pause();
 		this.setTime(0);
 	},
+	loadedCallback: function() {
+		this.loaded = true;
+		console.log('Loaded!');
+		if(this.callback) {
+			this.callback.call(this);
+			this.callback = null;
+		}
+	},
 	load: function(file, callback) {
-		this.element.onLoad = function() {
-			this.loaded = true;
-			
-			if(callback) {
-				callback.call(this);
-			}
-		}.bind(this);
-		
+		this.callback = callback;
 		this.loaded = false;
 		this.element.set('src', file);
 		this.element.load();
