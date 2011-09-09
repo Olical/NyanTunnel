@@ -46,6 +46,7 @@ var Sprite = new Class({
 	},
 	draw: function(target, offset) {
 		// Draw the image onto the target
+		// Use offset if required, it is basically a clipping mask for sprite sheets
 		if(offset) {
 			target.drawImage(this.image, offset.x, offset.y, offset.width, offset.height, (this.position.x + 0.5) << 0, (this.position.y + 0.5) << 0, offset.width, offset.height);
 		}
