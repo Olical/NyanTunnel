@@ -7,7 +7,7 @@ var Sound = new Class({
 		this.element = new Audio();
 		this.loaded = false;
 		this.callback = null;
-		this.element.addEvent('load', this.loadedCallback.bind(this));
+		this.element.addEventListener('canplaythrough', this.loadedCallback.bind(this), false);
 		
 		if(file) {
 			this.load(file, callback);
@@ -34,7 +34,7 @@ var Sound = new Class({
 	},
 	loadedCallback: function() {
 		this.loaded = true;
-		console.log('Loaded!');
+		
 		if(this.callback) {
 			this.callback.call(this);
 			this.callback = null;
